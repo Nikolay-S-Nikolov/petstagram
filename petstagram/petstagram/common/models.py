@@ -34,3 +34,4 @@ class PhotoLike(models.Model):
 
     # user = models.ForeignKey(Users)
 
+# photo_like = PhotoLike.objects.filter(pet_photo_id=pet_photo.pk, user=request.user)
