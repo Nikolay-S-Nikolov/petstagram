@@ -7,7 +7,7 @@
         <div class="edit-delete edit-photo">
             <h2>Delete pet</h2>
             <!-- Starts Delete Pet Form -->
-            <form action="{% url 'delete pet' username='Nikolay' pet_slug=pet.slug %}" method="post">
+            <form action="{% url 'delete pet' username='Nikolay' slug=pet.slug %}" method="post">
                 {{ pet_form.as_p }}        
                 <!-- Delete Pet Button -->
                 <button class="delete-btn" type="submit">Delete</button>
