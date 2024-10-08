@@ -7,16 +7,16 @@
         <div class="edit-delete edit-photo">
             <h2>Edit Pet</h2>
             <!-- Start Edit Pet From -->
-            <form action="{% url 'edit pet' username=username slug=pet.slug %}" method="post">
+            <form action="{% url 'edit pet' username="Nikolay" slug=object.slug %}" method="post">
 
-                {{ pet_form.as_p }}
+                {{ form.as_p }}
                 <button class="edit-btn" type="submit">Edit</button>
                 {% csrf_token %}
 
             </form>
             <!-- End Edit Pet Form -->
             <h4>Current image:</h4> 
-            <img width="80" src="{{ pet.pet_photo }}" alt="Photo of {{ pet.name }}">
+            <img width="80" src="{{ object.pet_photo }}" alt="Photo of {{ object.name }}">
         </div>
         <!-- End Edit Pet Section -->
 
