@@ -6,14 +6,14 @@
 
         <!-- Starts Edit Photo Section -->
         <div class="edit-delete edit-photo">
-            <h2>Edit photo</h2>
+            <h2>Delete photo</h2>
 
             <!-- Starts Edit Photo Form -->
-            <form action="{% url 'edit photo' pk=object.pk%}" method="post" enctype="multipart/form-data">
+            <form action="{% url 'delete photo' pk=object.pk%}" method="post" enctype="multipart/form-data">
                     {{ form }}
-{
+
                 <!-- Edit Photo Button -->
-                <button class="edit-btn" type="submit">Edit Photo</button>
+                <button class="delete-btn" type="submit">Delete</button>
                 {% csrf_token %}
             </form>
             <!-- End Edit Photo Form -->

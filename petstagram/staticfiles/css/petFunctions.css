@@ -56,7 +56,10 @@
 }
 
 .edit-delete a {
-	color: white;
+	color: black;
+}
+.edit-photo label a {
+	color: black;
 }
 
 /* .edit-photo select {

@@ -10,7 +10,7 @@ class IndexView(views.ListView):
         "photolike_set"
     ).prefetch_related(
         "pets"
-    )
+    ).distinct()
     template_name = 'common/home-page.html'
 
     paginate_by = 1

@@ -16,7 +16,7 @@
             <h3>
                 <a href="{% url 'details_profile' pk=1 %}">
                     <!-- if user has first name and last name -->
-                    Diyan Kalaydzhiev
+                    Nikolay Nikolov
                     <!-- else -->
                     <!-- user username -->
                 </a>
@@ -35,7 +35,7 @@
                     </a>
 
                     <!-- Link to Delete Pet Photo Page -->
-                    <a href="{% url 'edit photo' pk=photo.pk %}">
+                    <a href="{% url 'delete photo' pk=photo.pk %}">
                         <img class="bin-img" src="{% static 'images/icon-remove-22.jpg' %}" alt="bin button">
                     </a>
                 </div>
