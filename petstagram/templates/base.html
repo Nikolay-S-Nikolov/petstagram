@@ -47,35 +47,36 @@
                         </a>
                     </li>
                     {% if not request.user.is_authenticated %}
-                    <li class="nav-item">
+                        <li class="nav-item">
 
-                        <!-- Link to Login Page -->
-                        <a href="{% url 'signin_user' %}">
-                            <i>Login</i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
+                            <!-- Link to Login Page -->
+                            <a href="{% url 'signin_user' %}">
+                                <i>Login</i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
 
-                        <!-- Link to Register Page -->
-                        <a href="{% url 'signup_user' %}">
-                            <i>Register</i>
-                        </a>
-                    </li>
+                            <!-- Link to Register Page -->
+                            <a href="{% url 'signup_user' %}">
+                                <i>Register</i>
+                            </a>
+                        </li>
                     {% else %}
-                    <li class="nav-item">
+                        <li class="nav-item">
 
-                        <!-- Link to Profile Page -->
-                        <a href="{% url 'details_profile' pk=2 %}">
-                            <i>Profile</i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
+                            <!-- Link to Profile Page -->
+                            <a href="{% url 'details_profile' pk=request.user.pk %}">
+                                <i>Profile</i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <form action="{% url 'signout_user' %}" method="post">
+                                <!-- Lpg out -->
+                                <button class="button" type="submit">Log out</button>
+                                {% csrf_token %}
 
-                        <!-- Lpg out -->
-                        <a href="{% url 'signout_user' %}">
-                            <i>Log out</i>
-                        </a>
-                    </li>
+                            </form>
+                        </li>
                     {% endif %}
                 </ul>
             </div>

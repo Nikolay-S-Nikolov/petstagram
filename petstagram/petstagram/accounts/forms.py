@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth import forms as auth_forms
 
@@ -21,3 +22,7 @@ class PetstagramUserChangeForm(auth_forms.UserChangeForm):
     class Meta(auth_forms.UserChangeForm.Meta):
         model = UserModel
         fields = '__all__'
+
+
+class PetstagramUserLoginForm(auth_forms.AuthenticationForm):
+    username = forms.EmailField(widget=forms.EmailInput(attrs={"autofocus": True}))

@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
 
-from petstagram.accounts.forms import CreateUserForm
+from petstagram.accounts.forms import CreateUserForm, PetstagramUserLoginForm
 
 ModelUser = get_user_model()
 
@@ -16,12 +16,6 @@ class SignupUser(views.CreateView):
     template_name = "accounts/signup_user.html"
     success_url = reverse_lazy("index")
 
-    def form_valid(self, form):
-        result = super().form_valid(form)
-        user = form.save()
-        login(self.request, user)
-        return result
-
 
 # def signup_user(request):
 #     context = {}
@@ -29,7 +23,7 @@ class SignupUser(views.CreateView):
 
 
 class PetstagramLoginView(auth_views.LoginView):
-    form_class = auth_views.AuthenticationForm
+    form_class = PetstagramUserLoginForm
     template_name = "accounts/signin_user.html"
     redirect_authenticated_user = True
 
@@ -39,8 +33,11 @@ class PetstagramLoginView(auth_views.LoginView):
 #     return render(request, "accounts/signin_user.html", context)
 
 
-def signout_user(request):
-    return redirect("index")
+class PetstagramLogoutView(auth_views.LogoutView):
+    pass
+
+# def signout_user(request):
+#     return redirect("index")
 
 
 def details_profile(request, pk):
