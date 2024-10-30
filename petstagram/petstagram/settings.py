@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,10 +25,12 @@ SECRET_KEY = 'django-insecure-01!q^5@w54nqwo_t_&n)*k13cz@u!ppb_#(&q@8%mbzeodhpyo
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# To test the error page 404 run the following command:" python manage.py runserver --insecure" with DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost",
-    "127.0.0.1"
+    "127.0.0.1",
+    "*",  # allow all hosts
 ]
 
 # Application definition
@@ -159,3 +163,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #             'level': 'DEBUG',
 #             'propagate': False,
 #         }}}
+
+AUTH_USER_MODEL = "accounts.PetstagramUser"
+LOGIN_REDIRECT_URL = reverse_lazy("details_profile")

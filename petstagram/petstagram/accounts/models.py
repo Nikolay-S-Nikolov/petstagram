@@ -49,7 +49,7 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=30, blank=True, null=True)
     last_name = models.CharField(max_length=30, blank=True, null=True)
     date_of_birth = models.DateField(blank=True, null=True)
-    profile_picture = models.URLField(blank=True, nil=True)
+    profile_picture = models.URLField(blank=True, null=True)
 
     def get_full_name(self):
         """

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load custom_filter %}
 {% load static %}
 {% block main_content %}
     <!-- Starts Main Section -->
@@ -10,17 +11,18 @@
                 <h1>Petstagram</h1>
 
                 <!-- Start Register Form -->
-                <form action="">
-                    <input type="text" placeholder="Username">
-
-                    <input type="email" placeholder="Email">
-
-                    <input type="password" placeholder="Password">
-
-                    <input type="password" placeholder="Repeat Password">
+                <form method="post">
+                    {{ form.email|placeholder:"Email" }}    <!-- Email Field -->
+                    {{ form.email.errors }} <!-- Email Error -->
+                    
+                    {{ form.password1|placeholder:"Password" }} <!-- Password Field -->
+                    {{ form.password1.errors }} <!-- Password Error -->
+                    {{ form.password2|placeholder:"Repeat Password" }} <!-- Confirm Password Field -->
+                    {{ form.password2.errors }} <!-- Confirm Password Error -->
 
                     <!-- Register Button -->
                     <button type="submit">Register</button>
+                    {% csrf_token %}
                 </form>
                 <!-- End Register Form -->
 
