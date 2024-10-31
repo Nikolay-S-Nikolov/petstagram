@@ -14,6 +14,10 @@ class PetPhotoCreateView(views.CreateView):
         return reverse('details photo', kwargs={
             "pk": self.object.pk})
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 class PetPhotoDetailView(views.DetailView):
     queryset = PetPhoto.objects.all().prefetch_related(

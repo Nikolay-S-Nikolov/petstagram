@@ -4,19 +4,27 @@
     <div class="top">
         <!-- User Details and image location -->
         <div class="userDetails">
-            <a href="{% url 'details_profile' pk=1 %}">
+            <a href="{% url 'details_profile' pk=photo.user_id %}">
                 <div class="profilepic">
                     <div class="profile_img">
-                        <div class="image">
-                            <img src="{% static '/images/person.png' %}" alt="img8">
-                        </div>
+                        {% if photo.user.profile.profile_picture %}
+                            <div class="image">
+                                <!-- User Profile Image -->
+                                {{ photo.user.profile.profile_picture }}
+                            </div>
+                        {% else %}
+                            <div class="image">
+                                <!-- Default User Profile Image -->
+                                <img src="{% static 'images/person.png' %}" alt="img8">
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </a>
             <h3>
-                <a href="{% url 'details_profile' pk=1 %}">
+                <a href="{% url 'details_profile' pk=photo.user_id %}">
                     <!-- if user has first name and last name -->
-                    Nikolay Nikolov
+                    {{ photo.user.profile.get_profile_name }}
                     <!-- else -->
                     <!-- user username -->
                 </a>
@@ -81,7 +89,7 @@
 
         {% for pet in  photo.pets.all %}
 
-            <a href="{% url 'details pet' username='Nikolay' slug=pet.slug %}">
+            <a href="{% url 'details pet' username=pet.user.profile.get_profile_name|lower slug=pet.slug %}">
                 <p class="message">
                     <b>{{ pet.name }}</b>
                 </p>

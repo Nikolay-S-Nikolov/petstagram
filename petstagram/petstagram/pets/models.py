@@ -1,5 +1,8 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.text import slugify
+
+UserModel = get_user_model()
 
 
 class Pet(models.Model):
@@ -23,6 +26,11 @@ class Pet(models.Model):
         editable=False
     )
 
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
+    )
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
@@ -33,4 +41,3 @@ class Pet(models.Model):
 
     def __str__(self):
         return self.name
-

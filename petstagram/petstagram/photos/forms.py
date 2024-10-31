@@ -21,7 +21,6 @@ class PetPhotoBaseForm(forms.ModelForm):
 class PetPhotoCreateForm(PetPhotoBaseForm):
     pass
 
-
 class PetPhotoEditForm(PetPhotoBaseForm, ReadOnlyFieldsMixin):
     read_only_fields = ("photo",)
 

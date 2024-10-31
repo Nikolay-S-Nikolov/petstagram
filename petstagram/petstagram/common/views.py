@@ -48,6 +48,6 @@ def like_pet_photo(request, pk):
         pet_photo_like.delete()
 
     else:
-        PhotoLike.objects.create(pet_photo_id=pk)
+        PhotoLike.objects.create(pet_photo_id=pk, user=request.user)
 
     return redirect(request.META["HTTP_REFERER"] + f"#photo-{pk}")  # in order to remain on same photo f"#photo-{pk}"

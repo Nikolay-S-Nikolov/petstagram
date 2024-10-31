@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.validators import MinLengthValidator, BaseValidator
 from django.db import models
@@ -5,6 +6,8 @@ from django.db import models
 from petstagram.pets.models import Pet
 
 SIZE_5_MB = 5 * 1024 * 1024
+
+UserModel = get_user_model()
 
 
 class ImageSizeValidator(BaseValidator):
@@ -53,5 +56,7 @@ class PetPhoto(models.Model):
 
     modified_at = models.DateTimeField(auto_now=True)
 
-
-
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
+    )

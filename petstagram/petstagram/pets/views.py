@@ -19,13 +19,28 @@ class PetCreateView(views.CreateView):
                 "slug": self.object.slug
             })
 
+    # def form_valid(self, form):
+    #     pet = form.save(commit=False)
+    #     pet.user = self.request.user
+    #     pet.save()
+    #     return super().form_valid(form)
+
+    # def get_form(self, form_class=None):
+    #     form = super().get_form(form_class)
+    #     form.instance.user = self.request.user
+    #     return form
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 class PetDetailView(views.DetailView):
     model = Pet
     queryset = Pet.objects.all().prefetch_related(
         "petphoto_set"
     ).prefetch_related("petphoto_set__photolike_set"
-    ).prefetch_related("petphoto_set__pets")
+                       ).prefetch_related("petphoto_set__pets")
     template_name = "pets/details_pet.html"
     slug_url_kwarg = "slug"
 

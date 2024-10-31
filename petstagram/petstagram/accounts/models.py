@@ -51,6 +51,11 @@ class Profile(models.Model):
     date_of_birth = models.DateField(blank=True, null=True)
     profile_picture = models.URLField(blank=True, null=True)
 
+    def get_profile_name(self):
+        if self.get_full_name().strip():
+            return self.get_full_name()
+        return "Anonymous User"
+
     def get_full_name(self):
         """
         Return the first_name plus the last_name, with a space in between.

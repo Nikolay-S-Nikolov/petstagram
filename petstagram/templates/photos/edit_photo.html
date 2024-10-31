@@ -11,7 +11,7 @@
             <!-- Starts Edit Photo Form -->
             <form action="{% url 'edit photo' pk=object.pk%}" method="post" enctype="multipart/form-data">
                     {{ form }}
-{
+
                 <!-- Edit Photo Button -->
                 <button class="edit-btn" type="submit">Edit Photo</button>
                 {% csrf_token %}
