@@ -1,3 +1,4 @@
+{% load photo_likes %}
 {% load static %}
 {% load static %}
 
@@ -23,7 +24,7 @@
                 </div>
             </a>
             <h3>
-                <a href="{% url 'details_profile' pk=photo.user_id %}">
+                <a href="{% url 'details_profile' pk=photo.user.pk %}">
                     <!-- if user has first name and last name -->
                     {{ photo.user.profile.get_profile_name }}
                     <!-- else -->
@@ -69,7 +70,7 @@
 								<span class="heart">
                                     <a href="{% url 'like_pet_photo' pk=photo.pk %}">
                                         <!-- if user has liked the photo -->
-                                        {% if photo.photolike_set.all %}
+                                        {% if request.user.is_authenticated and photo|is_liked_by_user:request.user %}
                                             <i class="fa-solid fa-heart" style="color: #ed4040;"></i>
                                             <!-- else -->
                                         {% else %}
@@ -129,7 +130,7 @@
                             </div>
                             <p>
 
-                                <a href="{% url 'details_profile' pk= comment.user.pk %}">{{ comment.user.profile.get_short_name|default:"Anonymous" }}:</a>
+                                <a href="{% url 'details_profile' pk=comment.user.pk %}">{{ comment.user.profile.get_short_name|default:"Anonymous" }}:</a>
                                 <!-- User Comment -->
                                 {{ comment.text }}
 

@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views import generic as views
 
 from petstagram.accounts.forms import CreateUserForm, PetstagramUserLoginForm, ProfileEditForm
+from petstagram.accounts.models import Profile
 
 UserModel = get_user_model()
 
@@ -39,9 +40,22 @@ class ProfileEditView(views.UpdateView):
         return reverse_lazy("details_profile", kwargs={"pk": self.object.pk})
 
 
-def details_profile(request, pk):
-    context = {}
-    return render(request, "accounts/details_profile.html", context)
+class ProfileDetailsView(views.DetailView):
+    model = Profile
+    template_name = "accounts/details_profile.html"
+
+    def get_object(self, queryset=None):
+        return Profile.objects.get(pk=self.kwargs["pk"])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        total_likes = 0
+        for pet_photo in self.object.user.petphoto_set.all():
+            total_likes += pet_photo.photolike_set.count()
+        context["total_likes"] = total_likes
+        # context["total_likes"] = sum([photo.photolike_set.count() for photo in self.object.user.petphoto_set.all()])
+        return context
+
 
 
 def delete_profile(request, pk):
