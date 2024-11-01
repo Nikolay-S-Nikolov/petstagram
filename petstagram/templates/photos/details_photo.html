@@ -39,7 +39,7 @@
                                     <p>
                                         <!-- Link to User Profile Details Page-->
                                         <!-- User First and/or Last Name or username-->
-                                        <a href="{% url 'details_profile' pk=object.udr.pk %}">{{ object.user.profile.get_profile_name }}</a>
+                                        <a href="{% url 'details_profile' pk=object.pk %}">{{ object.user.profile.get_profile_name }}</a>
                                         <!-- User Comment -->
                                         - {{ comment.text }}
                                     </p>

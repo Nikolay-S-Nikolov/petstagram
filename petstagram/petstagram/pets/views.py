@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth import mixins as auth_mixins
 from django.urls import reverse, reverse_lazy
 from django.views import generic as views
 
@@ -6,7 +6,7 @@ from petstagram.pets.forms import PetCreateForm, PetEditForm, PetDeleteForm
 from petstagram.pets.models import Pet
 
 
-class PetCreateView(views.CreateView):
+class PetCreateView(auth_mixins.LoginRequiredMixin, views.CreateView):
     # model = Pet # - it is not needed as form_class is used
     form_class = PetCreateForm
     template_name = "pets/create_pet.html"
@@ -35,7 +35,7 @@ class PetCreateView(views.CreateView):
         return super().form_valid(form)
 
 
-class PetDetailView(views.DetailView):
+class PetDetailView(auth_mixins.LoginRequiredMixin, views.DetailView):
     model = Pet
     queryset = Pet.objects.all().prefetch_related(
         "petphoto_set"
@@ -45,7 +45,7 @@ class PetDetailView(views.DetailView):
     slug_url_kwarg = "slug"
 
 
-class PetEditView(views.UpdateView):
+class PetEditView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = Pet
     form_class = PetEditForm
     template_name = "pets/edit_pet.html"
@@ -61,7 +61,7 @@ class PetEditView(views.UpdateView):
         )
 
 
-class PetDeleteView(views.DeleteView):
+class PetDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Pet
     template_name = "pets/delete_pet.html"
     slug_url_kwarg = "slug"

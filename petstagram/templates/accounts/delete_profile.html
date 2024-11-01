@@ -10,7 +10,10 @@
             </h1>
             <div class="sure-buttons">
                 <!-- Yes (Delete Profile) Button -->
-                <button>Yes</button>
+                <form method="post">
+                    <button>Yes</button>
+                    {% csrf_token %}
+                </form>
                 <!-- Go Back Button -->
                 <a class="edit-btn" href="javascript:history.back()">Go Back</a>
             </div>

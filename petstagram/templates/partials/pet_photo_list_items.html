@@ -12,7 +12,8 @@
                         {% if photo.user.profile.profile_picture %}
                             <div class="image">
                                 <!-- User Profile Image -->
-                                {{ photo.user.profile.profile_picture }}
+                                <img src="{{ photo.user.profile.profile_picture }}" alt="img8">
+                                
                             </div>
                         {% else %}
                             <div class="image">
@@ -118,7 +119,8 @@
                                     {% if comment.user.profile.profile_picture %}
                                         <div class="image">
                                             <!-- User Profile Image -->
-                                            {{ photo.user.profile.profile_picture }}
+                                            <img src="{{ comment.user.profile.profile_picture }}" alt="img8">
+                                            
                                         </div>
                                     {% else %}
                                         <div class="image">
