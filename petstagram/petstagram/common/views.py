@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import generic as views
 
 from petstagram.common.forms import CommentForm
@@ -44,9 +45,12 @@ class IndexView(views.ListView):
 
 
 def like_pet_photo(request, pk):
-    # pet_photo_like = PetPhoto.objects.filter(pk=pk, user=request.user)
-    pet_photo_like = PhotoLike.objects.filter(pet_photo_id=pk).first()
 
+    if request.user.is_anonymous:
+        # return redirect(f"{reverse('signin_user')}?next=/photos/{pk}")
+        return redirect(f"{reverse('signin_user')}?next={request.META["HTTP_REFERER"] + f"#photo-{pk}"}")
+
+    pet_photo_like = PhotoLike.objects.filter(pet_photo_id=pk, user=request.user)
     if pet_photo_like:
         pet_photo_like.delete()
 

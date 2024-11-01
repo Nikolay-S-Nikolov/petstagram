@@ -164,6 +164,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #             'propagate': False,
 #         }}}
 
+LOGIN_URL = reverse_lazy("signin_user")
 AUTH_USER_MODEL = "accounts.PetstagramUser"
 LOGIN_REDIRECT_URL = reverse_lazy("index")
 LOGOUT_REDIRECT_URL = reverse_lazy("index")
