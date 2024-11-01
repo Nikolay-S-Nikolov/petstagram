@@ -52,7 +52,7 @@ class Profile(models.Model):
     profile_picture = models.URLField(blank=True, null=True)
 
     def get_profile_name(self):
-        if self.get_full_name().strip():
+        if self.get_full_name() != "None None":
             return self.get_full_name()
         return "Anonymous User"
 

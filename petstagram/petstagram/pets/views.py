@@ -15,7 +15,7 @@ class PetCreateView(auth_mixins.LoginRequiredMixin, views.CreateView):
         return reverse(
             'details pet',
             kwargs={
-                "username": "Nikolay",
+                "username": self.request.user.profile.get_profile_name() or "Anonymous",
                 "slug": self.object.slug
             })
 
