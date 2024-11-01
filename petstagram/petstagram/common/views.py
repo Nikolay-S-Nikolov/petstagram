@@ -1,6 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views import generic as views
 
+from petstagram.common.forms import CommentForm
 from petstagram.common.models import PhotoLike
 from petstagram.photos.models import PetPhoto
 
@@ -22,6 +24,7 @@ class IndexView(views.ListView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context["pet_name_pattern"] = self.pet_name_pattern or ""
+        context["comment_form"] = CommentForm()
         return context
 
     def get_queryset(self):
@@ -51,3 +54,18 @@ def like_pet_photo(request, pk):
         PhotoLike.objects.create(pet_photo_id=pk, user=request.user)
 
     return redirect(request.META["HTTP_REFERER"] + f"#photo-{pk}")  # in order to remain on same photo f"#photo-{pk}"
+
+
+@login_required
+def add_comment(request, photo_id):
+    form = CommentForm(request.POST or None)
+    if request.method == "POST":
+        photo = PetPhoto.objects.get(pk=photo_id)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.pet_photo = photo
+            comment.user = request.user
+            comment.save()
+
+            return redirect(
+                request.META["HTTP_REFERER"] + f"#photo-{photo_id}")  # in order to remain on same photo f"#photo-{pk}"
